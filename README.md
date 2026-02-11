@@ -3,7 +3,7 @@
 The Smart Cafeteria Management System follows a client-server architecture with a clear separation between the frontend (React Native/Expo) and the backend (Node.js/Express).
 
 ```mermaid
-graph TD
+flowchart TD
 
     %% Client Layer
     subgraph Client
@@ -12,31 +12,29 @@ graph TD
     end
 
     %% Backend Layer
-    subgraph Backend
-        C[API Gateway / Load Balancer]
+    subgraph Backend (Node.js + Express)
         D[Express Server]
         E[Auth Middleware]
-        F[Role Check Middleware]
-        G[Auth Controller]
-        H[Booking Controller]
-        I[Menu Controller]
-        J[Crowd Controller]
-        K[Admin Controller]
-        L[Staff Controller]
+        F[Role Middleware]
+
+        subgraph Controllers
+            G[Auth]
+            H[Booking]
+            I[Menu]
+            J[Crowd]
+            K[Admin]
+            L[Staff]
+        end
     end
 
-    %% Database Layer
-    subgraph Database
-        M[(MongoDB Atlas)]
-    end
+    %% Database
+    M[(MongoDB Atlas)]
 
-    %% Client to Backend
-    A -->|HTTPS / JSON| D
-    B -->|HTTPS / JSON| D
+    %% Flow
+    A -->|HTTPS| D
+    B -->|HTTPS| D
 
-    %% Backend Flow
-    D --> E
-    E --> F
+    D --> E --> F
     F --> G
     F --> H
     F --> I
@@ -44,13 +42,13 @@ graph TD
     F --> K
     F --> L
 
-    %% Controller to DB
     G --> M
     H --> M
     I --> M
     J --> M
     K --> M
     L --> M
+
 
 ```
 
