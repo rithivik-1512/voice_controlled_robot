@@ -12,29 +12,30 @@ flowchart TD
     end
 
     %% Backend Layer
-    subgraph Backend (Node.js + Express)
+    subgraph Backend
         D[Express Server]
         E[Auth Middleware]
         F[Role Middleware]
-
-        subgraph Controllers
-            G[Auth]
-            H[Booking]
-            I[Menu]
-            J[Crowd]
-            K[Admin]
-            L[Staff]
-        end
+        G[Auth Controller]
+        H[Booking Controller]
+        I[Menu Controller]
+        J[Crowd Controller]
+        K[Admin Controller]
+        L[Staff Controller]
     end
 
-    %% Database
-    M[(MongoDB Atlas)]
+    %% Database Layer
+    subgraph Database
+        M[(MongoDB Atlas)]
+    end
 
     %% Flow
     A -->|HTTPS| D
     B -->|HTTPS| D
 
-    D --> E --> F
+    D --> E
+    E --> F
+
     F --> G
     F --> H
     F --> I
@@ -48,6 +49,7 @@ flowchart TD
     J --> M
     K --> M
     L --> M
+
 
 
 ```
