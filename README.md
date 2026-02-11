@@ -30,8 +30,8 @@ flowchart TD
     end
 
     %% Flow
-    A -->|HTTPS| D
-    B -->|HTTPS| D
+    A --> D
+    B --> D
 
     D --> E
     E --> F
