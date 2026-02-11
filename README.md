@@ -4,27 +4,28 @@ The Smart Cafeteria Management System follows a client-server architecture with 
 
 ```mermaid
 graph TD
+
+    %% Client Layer
     subgraph Client
-        A[Mobile App (Expo)]
-        B[Web Dashboard (Expo)]
+        A[Mobile App - Expo]
+        B[Web Dashboard - Expo]
     end
 
+    %% Backend Layer
     subgraph Backend
         C[API Gateway / Load Balancer]
         D[Express Server]
         E[Auth Middleware]
         F[Role Check Middleware]
-        
-        subgraph Controllers
-            G[Auth Controller]
-            H[Booking Controller]
-            I[Menu Controller]
-            J[Crowd Controller]
-            K[Admin Controller]
-            L[Staff Controller]
-        end
+        G[Auth Controller]
+        H[Booking Controller]
+        I[Menu Controller]
+        J[Crowd Controller]
+        K[Admin Controller]
+        L[Staff Controller]
     end
 
+    %% Database Layer
     subgraph Database
         M[(MongoDB Atlas)]
     end
@@ -36,18 +37,21 @@ graph TD
     %% Backend Flow
     D --> E
     E --> F
-    F --> G & H & I & J & K & L
+    F --> G
+    F --> H
+    F --> I
+    F --> J
+    F --> K
+    F --> L
 
     %% Controller to DB
-    G -->|User Data| M
-    H -->|Bookings| M
-    I -->|Menu Items| M
-    J -->|Crowd Stats| M
-    K -->|Admin Stats| M
-    L -->|Order Status| M
+    G --> M
+    H --> M
+    I --> M
+    J --> M
+    K --> M
+    L --> M
 
-    %% External Services (if any)
-    %% H -.-> N[Payment Gateway]
 ```
 
 ## Component Description
